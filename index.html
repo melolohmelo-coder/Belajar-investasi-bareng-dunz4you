@@ -111,12 +111,6 @@ input{width:100%;padding:14px;border-radius:12px;border:1px solid #333;backgroun
 <script>
 let hh=11,mm=59,ss=59;
 setInterval(()=>{ss--; if(ss<0){ss=59;mm--} if(mm<0){mm=59;hh--} if(hh<0){hh=11} document.getElementById('h').innerText=hh; document.getElementById('m').innerText=mm; document.getElementById('s').innerText=ss;},1000);
-function hitung(){let m=parseInt(document.getElementById('modal').value||0); let b=parseInt(document.getElementById('bulan').value||0); let total=m; for(let i=0;i<60;i++){total=total*1.01+b;} document.getElementById('hasil').innerText='Rp '+Math.round(total).toLocaleString('id-ID');}
-hitung();
-const notifData=[["Rizky - Jakarta","Paket Lengkap"],["Sinta - Bandung","Paket VIP"],["Andi - Surabaya","Paket Lengkap"],["Putri - Medan","Paket Hemat"],["Dimas - Yogyakarta","Paket Lengkap"],["Nadia - Makassar","Paket VIP"]];
-let ni=0; setInterval(()=>{const n=document.getElementById('notif'); document.getElementById('notifName').innerText=notifData[ni%6][0]+' • '+notifData[ni%6][1]; n.classList.remove('hide'); setTimeout(()=>n.classList.add('hide'),4000); ni++;},8000);
-setTimeout(()=>document.getElementById('popup').classList.add('show'),5000);
-
 // 100 LAMA + 100 BARU = 200
 const names=[
  ["Dian Baru","Cianjur"],
