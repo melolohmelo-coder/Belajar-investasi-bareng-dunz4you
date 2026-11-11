@@ -109,9 +109,115 @@ input{width:100%;padding:14px;border-radius:12px;border:1px solid #333;backgroun
 <div class="popup" id="popup"><div class="popup-box"><h2>🎁 WAIT! Jangan Pergi Dulu</h2><p style="color:#bbb;font-size:14px;margin:10px 0">Dapetin <b style="color:#00FF88">BONUS E-book 100 Cara Atur Uang</b> gratis kalo daftar hari ini.</p><div style="font-size:32px;font-weight:900;color:#00FF88">Rp 99.000 <s style="font-size:14px;color:#777">Rp 350.000</s></div><a class="btn" href="https://wa.me/6281234567890?text=Mau%20klaim%20bonus%20ebook">KLAIM BONUS 🚀</a><br><button class="close" onclick="document.getElementById('popup').classList.remove('show')">Nanti aja</button></div></div>
 
 <script>
+<script>
 let hh=11,mm=59,ss=59;
 setInterval(()=>{ss--; if(ss<0){ss=59;mm--} if(mm<0){mm=59;hh--} if(hh<0){hh=11} document.getElementById('h').innerText=hh; document.getElementById('m').innerText=mm; document.getElementById('s').innerText=ss;},1000);
-// 100 LAMA + 100 BARU = 200
+
+const names=[
+["Dian Baru","Cianjur"],["Raka Baru","Bandung"],["Putri Baru","Jakarta"],["Fajar Baru","Surabaya"],["Nadia Baru","Medan"],
+["Gilang Baru","Yogyakarta"],["Maya Baru","Semarang"],["Irfan Baru","Makassar"],["Lina Baru","Bali"],["Bimo Baru","Palembang"],
+["Rizky Pratama","Jakarta"],["Sinta Maharani","Bandung"],["Andi Wijaya","Surabaya"],["Putri Ayu","Medan"],["Dimas Arya","Yogyakarta"],
+["Nadia Zahra","Makassar"],["Fajar Nugroho","Semarang"],["Dewi Lestari","Bali"],["Bagas Saputra","Palembang"],["Ayu Kartika","Malang"],
+["Raka Aditya","Bekasi"],["Maya Sari","Bogor"],["Irfan Hakim","Depok"],["Lina Marlina","Tangerang"],["Budi Santoso","Solo"],
+["Citra Dewi","Lampung"],["Eko Prasetyo","Malang"],["Fitri Rahma","Pekanbaru"],["Gilby Pratama","Batam"],["Hana Kusuma","Cirebon"],
+["Ika Nur","Jambi"],["Joko Susilo","Kediri"],["Kiki Amalia","Pontianak"],["Lukman Nul","Banjarmasin"],["Mira Andini","Padang"],
+["Nanda Putra","Manado"],["Oki Ramadhan","Samarinda"],["Puspita Sari","Bengkulu"],["Qori Aulia","Aceh"],["Rani Wijaya","Mataram"],
+["Sandi Pratama","Kupang"],["Tania Putri","Jayapura"],["Umar Faruq","Kendari"],["Vina Lestari","Palangkaraya"],["Wahyu Hidayat","Madiun"],
+["Xena Anggraini","Tegal"],["Yoga Saputra","Purwokerto"],["Zahra Nabila","Cimahi"],["Aldi Firmansyah","Sukabumi"],["Bella Febri","Garut"],
+["Candra Kusuma","Tasikmalaya"],["Della Puspita","Serang"],["Eka Wulandari","Jember"],["Fauzi Akbar","Banyuwangi"],["Gita Permata","Probolinggo"],
+["Hendra Kurniawan","Pasuruan"],["Intan Pratiwi","Blitar"],["Jefri Maulana","Mojokerto"],["Kartika Sari","Gresik"],["Lutfi Hidayah","Lamongan"],
+["Maulana Yusuf","Tuban"],["Nurul Hidayati","Bojonegoro"],["Oscar Pratama","Tulungagung"],["Pramudya Aji","Trenggalek"],["Queen Nabila","Nganjuk"],
+["Rendi Kurniawan","Situbondo"],["Sari Wulandari","Banyumas"],["Teguh Prasetyo","Kebumen"],["Umi Kulsum","Wonosobo"],["Vera Anggraini","Magelang"],
+["Wawan Setiawan","Klaten"],["Yanti Susanti","Sleman"],["Zaki Maulana","Bantul"],["Agus Priyanto","Gunungkidul"],["Bayu Anggara","Kulon Progo"],
+["Cindy Amelia","Karawang"],["Deni Kurniawan","Subang"],["Eva Susanti","Indramayu"],["Feri Andriansyah","Kuningan"],["Gilang Ramadhan","Majalengka"],
+["Hesti Wulandari","Sumedang"],["Ivan Setiawan","Purwakarta"],["Jihan Aulia","Cianjur"],["Kamaludin","Sukabumi"],["Lestari Wati","Cianjur"],
+["Maman Suherman","Bandung Barat"],["Nita Kurnia","Lembang"],["Opik Ramdani","Cimahi"],["Pipit Lestari","Banjar"],["Rizal Maulana","Ciamis"],
+["Salsabila Putri","Kuningan"],["Taufik Hidayat","Garut"],["Ujang Supriatna","Tasik"],["Vivi Novitasari","Cianjur"],["Wulan Dari","Bogor"],
+["Yusuf Maulana","Depok"],["Zidan Ramadhan","Bekasi"],["Aisyah Rahma","Jakarta Timur"],["Bima Sakti","Jakarta Selatan"],["Cahaya Putri","Jakarta Barat"],
+["Dara Ayu","Jakarta Utara"],["Erlangga Pratama","Jakarta Pusat"],["Fathir Alfarizi","Tangerang Selatan"],["Gendis Ayu","Serang"],["Hafidz Maulana","Pandeglang"],
+["Indah Permata","Lebak"],["Jihan Salsabila","Rangkasbitung"],["Khalisa Putri","Cilegon"],["Lukman Hakim","Cilegon"],["Melati Sari","Tangerang"],
+["Adit Saputra","Cianjur"],["Bunga Lestari","Sukabumi"],["Cahyo Nugroho","Bogor"],["Dian Permata","Depok"],["Erlin Wijaya","Bekasi"],
+["Faisal Rahman","Jakarta"],["Gusti Ayu","Denpasar"],["Hendra Wijaya","Surabaya"],["Ika Prameswari","Malang"],["Jaya Kusuma","Yogyakarta"],
+["Kirana Dewi","Solo"],["Larasati Putri","Semarang"],["Miftahul Huda","Madura"],["Nadia Putri","Bandung"],["Oktavia Sari","Palembang"],
+["Pradana Wijaya","Medan"],["Qisya Zahra","Aceh"],["Rama Adit","Makassar"],["Salsabila Nabila","Manado"],["Taufik Akbar","Kendari"],
+["Umar Syarif","Palu"],["Vania Putri","Gorontalo"],["Willy Kusuma","Banjarmasin"],["Yolanda Sari","Pontianak"],["Zulfikar Ahmad","Samarinda"],
+["Aulia Rahman","Balikpapan"],["Bayu Prasetyo","Tarakan"],["Chintya Dewi","Kupang"],["Dimas Prasetyo","Mataram"],["Elisa Putri","Bima"],
+["Fajar Sidik","Ambon"],["Gita Anggraini","Jayapura"],["Hafizah Putri","Sorong"],["Indra Wijaya","Timika"],["Jessica Lestari","Merauke"],
+["Kevin Pratama","Biak"],["Lulu Maulida","Ternate"],["Mahesa Putra","Tidore"],["Nabila Aisyah","Banda Aceh"],["Oki Setiawan","Lhokseumawe"],
+["Putri Melati","Langsa"],["Rafi Ahmad","Padang"],["Sari Melinda","Bukittinggi"],["Tegar Maulana","Payakumbuh"],["Ulfa Zahra","Pekanbaru"],
+["Vega Pradana","Dumai"],["Wulan Sari","Tanjung Pinang"],["Yudha Pratama","Batam"],["Zara Lestari","Jambi"],["Agus Salim","Bengkulu"],
+["Budi Hartono","Palembang"],["Cindy Pratiwi","Lampung"],["Dede Kurniawan","Bandar Lampung"],["Evi Lestari","Metro"],["Fadli Ramadhan","Serang"],
+["Gilang Kusuma","Cilegon"],["Hani Susanti","Pandeglang"],["Irfan Maulana","Lebak"],["Joni Pratama","Tangerang"],["Kurnia Dewi","Tangerang Selatan"],
+["Lia Amalia","South Tangerang"],["Mira Lestari","Cikarang"],["Nana Wijaya","Karawang"],["Oman Suherman","Subang"],["Puspita Dewi","Purwakarta"],
+["Rizki Maulana","Cimahi"],["Sinta Dewi","Cianjur"],["Tina Susanti","Garut"],["Udin Saepudin","Tasikmalaya"],["Vina Marlina","Ciamis"],
+["Wawan Hermawan","Banjar"],["Yanti Marlina","Kuningan"],["Zainal Abidin","Majalengka"],["Asep Supriadi","Sumedang"],["Bambang Sutrisno","Indramayu"],
+["Cici Permata","Cirebon"],["Dodi Hermawan","Kuningan"],["Eka Pradana","Cirebon"],["Fani Lestari","Majalengka"],["Geri Pratama","Indramayu"],
+["Haryanto Wijaya","Subang"],["Iin Kurniawati","Karawang"],["Joko Prasetyo","Bekasi"],["Kartika Dewi","Cikarang"],["Lina Susanti","Cikampek"],
+["Mulyadi Pratama","Purwakarta"],["Novi Lestari","Cianjur"],["Oded Maulana","Sukabumi"],["Pipih Susanti","Bogor"],["Rahmat Hidayat","Depok"],
+["Sari Amelia","Jakarta Selatan"],["Tono Wijaya","Jakarta Barat"],["Umi Azizah","Jakarta Timur"],["Vicky Pratama","Jakarta Utara"],["Winda Lestari","Jakarta Pusat"],
+["Yoga Pradana","Kepulauan Seribu"],["Zahra Maulida","Bogor"],["Ade Putra","Sukabumi"],["Bella Anggraini","Cianjur"],["Candra Pratama","Garut"]
+];
+
+const texts=["Baru 2 minggu udah paham investasi. Materinya daging, ga muter-muter.","Awalnya takut investasi itu judi. Setelah ikut kelas, baru paham cara aman.","Kerja kantoran tapi masih sempet belajar. Template keuangan nya ngebantu banget.","Sempat ragu, ternyata ada garansi. Sekarang udah punya portofolio pertama.","Dulu ikut kelas 500rb isinya teori doang. Di DUNZ langsung praktek.","Sebagai IRT bisa belajar sambil jagain anak. Sekarang udah bisa nabung emas.","Modal HP doang, diajarin cara mulai reksadana dari 10rb. Gampang banget.","Grupnya rame, tiap hari ada yang sharing hasil investasi. Ketularan semangat.","Awalnya skeptis, tapi testimoni nya banyak. Ternyata beneran bagus.","Baru join 5 hari udah berani mulai investasi pertama!","Baru 1 bulan portofolio udah ijo semua. Padahal awalnya nol banget.","Udah bisa bedain saham bagus sama saham gorengan. Mantap mentornya.","Dari yang tadinya boros, sekarang bisa nabung 1jt per bulan. Gila sih.","Kelasnya worth it banget, harga 99rb ilmunya seumur hidup.","Tiap minggu ada live Q&A, ditanya apa aja dijawab. Ga pelit ilmu."];
+const cuanList=[850000,1200000,640000,2100000,450000,980000,750000,1500000,320000,2000000];
+const colors=["#00FF88","#FFC107","#FF6B6B","#00D1FF","#FF9F43"];
+
+function hitung(){
+  let m = Number(document.getElementById('modal').value)||0;
+  let b = Number(document.getElementById('bulan').value)||0;
+  let total = m;
+  for(let i=0;i<5;i++){ total = total*1.12 + b*12; }
+  document.getElementById('hasil').innerText = "Rp " + Math.round(total).toLocaleString('id-ID');
+}
+hitung();
+
+let shown=0, currentFilter='all';
+function getFiltered(){
+  if(currentFilter==='all') return names;
+  if(currentFilter==='cuan') return names.slice(0,80);
+  if(currentFilter==='pemula') return names.slice(80,140);
+  return names.slice(140);
+}
+function render(reset){
+  if(reset) shown=0;
+  let list = getFiltered();
+  let box = document.getElementById('testi-list');
+  if(reset) box.innerHTML='';
+  let end = Math.min(shown+20, list.length);
+  for(let i=shown;i<end;i++){
+    let n = list[i];
+    let t = texts[i % texts.length];
+    let c = cuanList[i % cuanList.length];
+    let initial = n[0].charAt(0);
+    let col = colors[i % colors.length];
+    let tag = currentFilter==='cuan' ? `<span class="tag">💰 Cuan Rp ${c.toLocaleString('id-ID')}</span>` : (i<10 ? `<span class="tag">✨ Baru Join</span>` : `<span class="tag">✅ Terverifikasi</span>`);
+    box.innerHTML += `<div class="testi"><div class="testi-top"><div class="avatar" style="background:${col}">${initial}</div><div><b>${n[0]}</b><div style="font-size:12px;color:#888">${n[1]} • Terverifikasi</div></div></div><div class="stars">★★★★★</div><p style="font-size:14px;color:#ddd;margin-top:8px">${t}</p>${tag}</div>`;
+  }
+  shown=end;
+  document.getElementById('counter').innerText = `Menampilkan ${shown} dari ${list.length} testimoni`;
+  document.getElementById('loadMore').style.display = shown>=list.length ? 'none':'inline-block';
+}
+function loadMore(){ render(false); }
+function setFilter(f,btn){
+  currentFilter=f;
+  document.querySelectorAll('.filter button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render(true);
+}
+render(true);
+
+let notifIdx=0;
+setInterval(()=>{
+  let n = names[notifIdx % names.length];
+  document.getElementById('notifName').innerText = n[0]+" - "+n[1];
+  let notif = document.getElementById('notif');
+  notif.classList.remove('hide');
+  setTimeout(()=>{ notif.classList.add('hide'); },3500);
+  notifIdx++;
+},8000);
+
+setTimeout(()=>{ document.getElementById('popup').classList.add('show'); },15000);
+</script>// 100 LAMA + 100 BARU = 200
 const names=[
  ["Dian Baru","Cianjur"],
 ["Raka Baru","Bandung"],
